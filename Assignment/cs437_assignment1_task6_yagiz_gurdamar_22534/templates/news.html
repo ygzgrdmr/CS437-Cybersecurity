@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            padding: 20px 0;
+        }
+        ul, .uploaded-news-container {
+            list-style: none;
+            padding: 0;
+        }
+        ul li, .uploaded-news-item {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        ul li a, .uploaded-news-item a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        ul li p, .uploaded-news-item p {
+            color: #666;
+        }
+        .uploaded-news-item {
+            border-left: 4px solid #007bff;
+            margin-bottom: 1rem;
+        }
+        .uploaded-news-item h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .remove-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none; /* Form butonlarında sınırı kaldır */
+    cursor: pointer; /* Buton üzerine gelindiğinde cursor değişikliği */
+    transition: background-color 0.3s;
+        }
+
+        .remove-button:hover {
+            background: #bd2130;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>News</h1>
+        <!-- Search Form -->
+        <form action="{{ url_for('show_news') }}" method="get">
+            <input type="text" name="query" placeholder="Search news..." required>
+            <button type="submit" class="button">Search</button>
+        </form>
+
+        <!-- RSS'den Gelen Haberleri Listeleme -->
+        <h2>RSS News</h2>
+        <ul>
+            {% for article in articles %}
+                <li>
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.summary | safe }}</p>
+                    <a href="{{ article.link }}" target="_blank">Read Full Article</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Kullanıcı Tarafından Eklenen XML İçerikleri Listeleme -->
+        <h2>Uploaded XML Comments</h2>
+        <div class="uploaded-news-container">
+            {% for news in uploaded_news %}
+                <div class="uploaded-news-item">
+                    <h3>Uploaded by: {{ news.uploader }}</h3>
+                    {% for tag, text in news.content %}
+                        <p><strong>{{ tag | capitalize }}:</strong> {{ text if text else "No data" }}</p>
+                    {% endfor %}
+            <!-- Remove News Butonu -->
+                    <form action="{{ url_for('remove_news', article_id=news.id) }}" method="post">
+                                 <button type="submit" class="button remove-button">Remove</button>
+                      </form>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <!-- Add News Butonu -->
+        <a href="{{ url_for('add_news') }}" class="button">Add News</a>
+
+        <!-- Home Butonu -->
+        <a href="{{ url_for('home') }}" class="button">Home</a>
+    </div>
+</body>
+</html>

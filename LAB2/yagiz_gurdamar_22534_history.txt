@@ -1,0 +1,29 @@
+    1  history -w
+    2  clean
+    3  git clone https://github.com/jordan-wright/elastichoney
+    4  git clone https://github.com/bontchev/elasticpot
+    5  ls
+    6  cd elastichoney
+    7  ls
+    8  screen
+    9  sudo apt install golang-go
+   10  screen
+   11  go mod init elastichoney
+   12  go mod tidy
+   13  screen
+   14  cd ..
+   15  ls
+   16  elasticpot
+   17  cd elasticpot
+   18  sudo apt install python3
+   19  sudo apt install python3-pip
+   20  pip3 install -r requirements.txt
+   21  screen
+   22  ls
+   23  cd etc
+   24  ls
+   25  nano honeypot.cfg.base
+   26  cd ..
+   27  screen
+   28  cd ..
+   29  history > ~/history.txt

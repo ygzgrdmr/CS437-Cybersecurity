@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .profile-info {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f0f0f0;
+            border: 1px solid #e1e1e1;
+            border-radius: 4px;
+        }
+        .profile-info p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            border: none;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .logout {
+            background-color: #dc3545;
+        }
+        .logout:hover {
+            background-color: #bd2130;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        <div class="profile-info">
+            <p>Username: <strong>{{ user_info.username }}</strong></p>
+            <p>Name: <strong>{{ user_info.name }}</strong></p>
+            <p>Surname: <strong>{{ user_info.surname }}</strong></p>
+            <p>Age: <strong>{{ user_info.age }}</strong></p>
+        </div>
+        <!-- Logout button -->
+        <a href="{{ url_for('logout') }}" class="button logout">Logout</a>
+        <!-- Add news button -->
+        <a href="{{ url_for('add_news') }}" class="button">Add News</a>
+        <!-- Other links as needed -->
+        <a href="{{ url_for('show_news') }}" class="button">Show News</a>
+    </div>
+</body>
+
+</html>
+
+
